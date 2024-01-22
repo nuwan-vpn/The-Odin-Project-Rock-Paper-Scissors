@@ -3,7 +3,6 @@ const options = ["rock", "paper", "scissor"];
 
 function getComputerChoice(){
     const choice = options[Math.floor((Math.random())*options.length)];
-    // console.log(choice);
     return choice;   
 }
 
@@ -38,23 +37,39 @@ function checkWinner (playerSelection, computerSelection){
 function playRound(playerSelection, computerSelection) {
     const result = checkWinner(playerSelection, computerSelection);
     if (result == "Tie"){
-        return "It's a tie";
+        return `It's a tie.`;
     } else if (result == "Player"){
-        return `You win! ${playerSelection} beats ${computerSelection}`;
+        return `You win! ${playerSelection} beats ${computerSelection}.`;
     } else {
-        return `You lose! ${computerSelection} beats ${playerSelection}`;
+        return `You lose! ${computerSelection} beats ${playerSelection}.`;
     }
     
 }
 
 function game(){
-    console.log("Welcome");
+    console.log("Welcome!");
+    let scorePlayer = 0;
+    let scoreComputer = 0;
     for(let i=0; i<5; i++){
+        console.log("-------------------------------------");
         const playerSelection = getPlayerChoice();
         const computerSelection = getComputerChoice();
         console.log(playRound(playerSelection, computerSelection));
+        if(checkWinner(playerSelection, computerSelection) == "Player"){
+            scorePlayer++;
+        } else if (checkWinner(playerSelection, computerSelection) == "Computer"){
+            scoreComputer++;
+        } 
+    }
+    console.log("Game over");
+    if(scorePlayer > scoreComputer){
+        console.log("You are the winner.");
+    } else if (scoreComputer > scorePlayer){
+        console.log("Computer is the winner.");
+    } else {
+        console.log("We have a tie.");
     }
 }
 
 game()
-//getComputerChoice();
+
