@@ -3,6 +3,7 @@ const options = ["rock", "paper", "scissor"];
 
 function getComputerChoice(){
     const choice = options[Math.floor((Math.random())*options.length)];
+    console.log(choice);
     return choice;   
 }
 
@@ -19,10 +20,10 @@ function checkWinner (playerSelection, computerSelection){
 }
 
 function playRound(playerSelection, computerSelection) {
-    const result = checkWinner();
-    if (result === "Tie"){
+    const result = checkWinner(playerSelection, computerSelection);
+    if (result == "Tie"){
         return "It's a tie";
-    } else if (result === "Player"){
+    } else if (result == "Player"){
         return `You win! ${playerSelection} beats ${computerSelection}`;
     } else {
         return `You lose! ${computerSelection} beats ${playerSelection}`;
