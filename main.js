@@ -44,8 +44,12 @@ function playRound(playerSelection, computerSelection) {
     if (result == "Tie") {
         return `It's a tie.`;
     } else if (result == "Player") {
+        scorePlayer++;
+        updateScores();
         return `You win! ${playerSelection} beats ${computerSelection}.`;
     } else {
+        scoreComputer++;
+        updateScores();
         return `You lose! ${computerSelection} beats ${playerSelection}.`;
     }
 }
@@ -54,15 +58,24 @@ function game(playerSelection) {
     const computerSelection = getComputerChoice();
     const result = playRound(playerSelection, computerSelection);
 
-    console.log(result);
+    if (scorePlayer === 5 || scoreComputer === 5) {
+        announceWinner();
+    }
+}
 
-    if (result.includes("win")) {
-        scorePlayer++;
-    } else if (result.includes("lose")) {
-        scoreComputer++;
+function announceWinner() {
+    if (scorePlayer > scoreComputer) {
+        console.log("Congratulations! You are the winner.");
+    } else if (scoreComputer > scorePlayer) {
+        console.log("Computer is the winner. Better luck next time.");
+    } else {
+        console.log("It's a tie. The game is drawn.");
     }
 
-    updateScores(); // Call the function to update scores in the HTML
+    // Optionally, reset the scores for a new game
+    scorePlayer = 0;
+    scoreComputer = 0;
+    updateScores();
 }
 
 // Remove the following line as it will automatically call the game function without user interaction
