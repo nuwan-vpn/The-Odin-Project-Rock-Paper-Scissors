@@ -22,6 +22,10 @@ function updateScores() {
     document.getElementById('computer-score').textContent = `Computer's Score: ${scoreComputer}`;
 }
 
+function updateWinnerMessage(message) {
+    document.getElementById('winner-message').textContent = message;
+}
+
 function getComputerChoice() {
     const choice = options[Math.floor(Math.random() * options.length)];
     return choice;
@@ -64,18 +68,19 @@ function game(playerSelection) {
 }
 
 function announceWinner() {
-    if (scorePlayer > scoreComputer) {
-        console.log("Congratulations! You are the winner.");
-    } else if (scoreComputer > scorePlayer) {
-        console.log("Computer is the winner. Better luck next time.");
-    } else {
-        console.log("It's a tie. The game is drawn.");
+    if (scorePlayer === 5 || scoreComputer === 5) {
+        if (scorePlayer > scoreComputer) {
+            updateWinnerMessage("Congratulations! You are the winner.");
+        } else if (scoreComputer > scorePlayer) {
+            updateWinnerMessage("Computer is the winner. Better luck next time.");
+        } else {
+            updateWinnerMessage("It's a tie. The game is drawn.");
+        }
+        // Optionally, reset the scores for a new game
+        // scorePlayer = 0;
+        // scoreComputer = 0;
+        updateScores();
     }
-
-    // Optionally, reset the scores for a new game
-    scorePlayer = 0;
-    scoreComputer = 0;
-    updateScores();
 }
 
 // Remove the following line as it will automatically call the game function without user interaction
